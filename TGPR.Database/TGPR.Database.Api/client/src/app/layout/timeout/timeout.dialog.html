@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>Logging Out</h1>
+<div mat-dialog-content class="timeout-modal">
+  <div class="text-center">
+    <h3>{{data.countdown}}</h3>
+    <mat-progress-bar [value]="(data.countdown * (100 / 30))"></mat-progress-bar>
+  </div>
+</div>

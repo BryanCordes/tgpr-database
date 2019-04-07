@@ -1,0 +1,56 @@
+<div class="text-right">
+  <button mat-raised-button (click)="create()" style="margin: 16px 8px;"><i class="material-icons">add</i> Create Category</button>
+</div>
+
+<mat-accordion class="tgpr-accordion mat-elevation-z8" [multi]="true">
+  <mat-expansion-panel *ngFor="let category of _viewModel.template.Categories; let i = index"
+                       [expanded]="i === 0"
+                       [hideToggle]="true"
+                       class="mt-3">
+    <mat-expansion-panel-header>
+
+      <swal
+        #deleteCategory
+        title="Delete Category"
+        text="Are you sure you would like to delete this category?"
+        type="warning"
+        [showCancelButton]="true"
+        [focusCancel]="true"
+        (confirm)="delete(category)">
+      </swal>
+
+      <mat-panel-title>
+        <span>{{category.Name}}</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{_viewModel.getDescription(category)}}
+
+        <span>
+          <mat-icon *ngIf="i !== template.Categories.length - 1"
+                    (click)="moveDown(category, $event)"
+                    matTooltip="Move Down">
+            keyboard_arrow_down
+          </mat-icon>
+          <mat-icon *ngIf="i !== 0"
+                    (click)="moveUp(category, $event)"
+                    matTooltip="Move Up">
+            keyboard_arrow_up
+          </mat-icon>
+
+          <mat-icon [swal]="deleteCategory"
+                    (click)="$event.stopPropagation()"
+                    matTooltip="Delete">
+            delete_outline
+          </mat-icon>
+          <mat-icon (click)="edit(category, $event)"
+                    matTooltip="Edit">
+            edit
+          </mat-icon>
+        </span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <tgpr-application-administration-questions [category]="category"
+                                               [questionTypes]="_viewModel.questionTypes">
+    </tgpr-application-administration-questions>
+  </mat-expansion-panel>
+</mat-accordion>

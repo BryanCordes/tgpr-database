@@ -1,0 +1,78 @@
+<ni-breadcrumb [menu]="breadcrumb" [style]="'custom1'" class="mb-4"></ni-breadcrumb>
+
+<div class="card-wrap">
+  <h3 class="card-header h5">Create User</h3>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <ni-card [title]="'Account Information'" [align]="'left'">
+
+              <mat-form-field>
+                <input name="email" matInput placeholder="Email (Username)" type="email" [formControl]="_viewModel.emailFormControl">
+                <mat-error *ngIf="_viewModel.emailFormControl.hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="_viewModel.emailFormControl.hasError('email') && !_viewModel.emailFormControl.hasError('required')">
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input name="password" matInput placeholder="Temporary Password" type="password" [formControl]="_viewModel.passwordFormControl">
+                <mat-error *ngIf="_viewModel.passwordFormControl.hasError('required')">
+                  Password is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+
+            </ni-card>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <ni-card [title]="'User Roles'" [align]="'left'">
+              <tgpr-user-role-list [user]="_viewModel.user"
+                                   [roles]="_viewModel.roles">
+              </tgpr-user-role-list>
+
+            </ni-card>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <ni-card [title]="'Personal Information'" [align]="'left'">
+
+          <mat-form-field>
+            <input name="firstName" matInput placeholder="First Name" type="text" [formControl]="_viewModel.firstNameFormControl">
+            <mat-error *ngIf="_viewModel.firstNameFormControl.hasError('required')">
+              First name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="lastName" matInput placeholder="Last Name" type="text" [formControl]="_viewModel.lastNameFormControl">
+            <mat-error *ngIf="_viewModel.lastNameFormControl.hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="phone" matInput placeholder="Phone Number" type="text" mask="(000) 000-0000" [formControl]="_viewModel.phoneFormControl">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="address" matInput placeholder="Phone Number" type="text" [formControl]="_viewModel.addressFormControl">
+          </mat-form-field>
+
+        </ni-card>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+
+    <button ni-button [beforeIcon]="'fa fa-undo'" [view]="'error'" (click)="cancel()" role="button">Cancel</button>
+    <button class="ml-3" ni-button [beforeIcon]="'fa fa-save'" (click)="save()" role="button">Save</button>
+
+  </div>
+</div>

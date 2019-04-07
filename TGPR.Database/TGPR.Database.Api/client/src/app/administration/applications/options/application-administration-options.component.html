@@ -1,0 +1,64 @@
+<mat-divider [inset]="false"></mat-divider>
+<div class="text-right">
+  <button mat-raised-button (click)="create()" style="margin: 16px 8px;"><i class="material-icons">add</i> Create Option</button>
+</div>
+<mat-divider *ngIf="_viewModel.question.Options.length > 0" [inset]="false"></mat-divider>
+
+<mat-accordion *ngIf="_viewModel.question.Options.length > 0" class="tgpr-accordion tgpr-question-item-outline" [multi]="true">
+  <mat-expansion-panel *ngFor="let option of _viewModel.question.Options; let i = index"
+                       [ngClass]="{'tgpr-option-children-outline': option.ChildQuestions && option.ChildQuestions.length > 0}"
+                       [expanded]="false"
+                       [hideToggle]="true"
+                       class="mt-3">
+
+    <swal
+      #deleteQuestion
+      title="Delete Option"
+      text="Are you sure you would like to delete this option?"
+      type="warning"
+      [showCancelButton]="true"
+      [focusCancel]="true"
+      (confirm)="delete(option)">
+    </swal>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span>{{option.Text}}</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        <span class="tgpr-accordion-column">
+          <span *ngIf="option.ApplicationOptionStatusId === status.PromptForExit"><mat-icon class="danger">error_outline</mat-icon> Prompt for Exit | </span>
+          <span *ngIf="option.ApplicationOptionStatusId === status.MarkForReview"><mat-icon class="warning">warning</mat-icon> Mark for Review | </span>
+          <span>Review Order: {{option.ReviewerSortOrder}}</span>
+        </span>
+
+        <span>
+          <mat-icon *ngIf="i !== _viewModel.question.Options.length - 1"
+                    (click)="moveDown(option, $event)"
+                    matTooltip="Move Down">
+            keyboard_arrow_down
+          </mat-icon>
+          <mat-icon *ngIf="i !== 0"
+                    (click)="moveUp(option, $event)"
+                    matTooltip="Move Up">
+            keyboard_arrow_up
+          </mat-icon>
+          <mat-icon [swal]="deleteQuestion"
+                    (click)="$event.stopPropagation()"
+                    matTooltip="Delete">
+            delete_outline
+          </mat-icon>
+          <mat-icon (click)="edit(option, $event)"
+                    matTooltip="Edit">
+            edit
+          </mat-icon>
+        </span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <tgpr-application-administration-questions [category]="category"
+                                               [option]="option"
+                                               [questionTypes]="_viewModel.questionTypes">
+    </tgpr-application-administration-questions>
+
+  </mat-expansion-panel>
+</mat-accordion>

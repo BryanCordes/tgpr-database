@@ -1,0 +1,16 @@
+<swal
+  #timeoutSwal
+  title="Logging Off"
+  type="warning"
+  timer="{{timeoutMilliseconds}}"
+  [showConfirmButton]="false"
+  [showCancelButton]="false"
+  [focusCancel]="true"
+  (cancel)="close()">
+  <div class="swal2-content text-center" *swalPartial>
+    In {{countdown}} seconds
+  </div>
+</swal>
+
+
+

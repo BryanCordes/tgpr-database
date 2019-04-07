@@ -1,0 +1,60 @@
+<mat-divider [inset]="false"></mat-divider>
+<div class="text-right">
+  <button mat-raised-button (click)="create()" style="margin: 16px 8px;"><i class="material-icons">add</i> Create Question</button>
+</div>
+<mat-divider *ngIf="_viewModel.questions.length > 0" [inset]="false"></mat-divider>
+
+<mat-accordion *ngIf="_viewModel.questions.length > 0" class="tgpr-accordion tgpr-question-item-outline" [multi]="true">
+  <mat-expansion-panel *ngFor="let question of _viewModel.questions; let i = index"
+                       (opened)="expand(question)"
+                       [expanded]="_viewModel.hasEditableOptions(question)"
+                       [hideToggle]="true"
+                       #expansionPanel
+                       class="mt-3">
+
+    <swal
+      #deleteQuestion
+      title="Delete Question"
+      text="Are you sure you would like to delete this question?"
+      type="warning"
+      [showCancelButton]="true"
+      [focusCancel]="true"
+      (confirm)="delete(question)">
+    </swal>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span>{{question.Text}}</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{_viewModel.getDescription(question)}}
+
+        <span>
+          <mat-icon *ngIf="i !== _viewModel.questions.length - 1"
+                    (click)="moveDown(question, $event)"
+                    matTooltip="Move Down">
+            keyboard_arrow_down
+          </mat-icon>
+          <mat-icon *ngIf="i !== 0"
+                    (click)="moveUp(question, $event)"
+                    matTooltip="Move Up">
+            keyboard_arrow_up
+          </mat-icon>
+          <mat-icon [swal]="deleteQuestion"
+                    (click)="$event.stopPropagation()"
+                    matTooltip="Delete">
+            delete_outline
+          </mat-icon>
+          <mat-icon (click)="edit(question, $event)"
+                    matTooltip="Edit">
+            edit
+          </mat-icon>
+        </span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <tgpr-application-administration-options [category]="_viewModel.category"
+                                             [question]="question"
+                                             [questionTypes]="_viewModel.questionTypes">
+    </tgpr-application-administration-options>
+  </mat-expansion-panel>
+</mat-accordion>

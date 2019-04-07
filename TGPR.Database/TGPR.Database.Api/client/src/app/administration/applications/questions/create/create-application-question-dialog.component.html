@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Create Application Question</h1>
+<mat-dialog-content>
+
+  <mat-form-field>
+    <mat-select placeholder="Question Type" [(ngModel)]="question.ApplicationQuestionTypeId">
+      <mat-option *ngFor="let type of questionTypes" [value]="type.ApplicationQuestionTypeId">
+        {{type.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Question Text" [(ngModel)]="question.Text">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Review Sort Order" [(ngModel)]="question.ReviewerSortOrder">
+      <mat-option *ngFor="let q of questionCount" [value]="q">
+        {{q}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="question">OK</button>
+</div>

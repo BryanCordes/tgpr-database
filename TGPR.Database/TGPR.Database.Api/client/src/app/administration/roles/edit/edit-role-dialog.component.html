@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Edit Role</h1>
+<mat-dialog-content>
+  <div class="row">
+    <div class="col-sm-12">
+      <mat-form-field>
+        <input matInput placeholder="Role Name" [(ngModel)]="role.Name">
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="role">OK</button>
+</div>

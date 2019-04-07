@@ -1,0 +1,5 @@
+<ni-card [title]="_viewModel.role ? _viewModel.role.Name : ''" [align]="'left'">
+  <div *ngFor="let activity of _viewModel.roleActivities">
+    <mat-slide-toggle color="primary" [checked]="activity.RoleActivity" (toggleChange)="toggle(activity)">{{activity.Activity.Name}}</mat-slide-toggle>
+  </div>
+</ni-card>

@@ -1,0 +1,17 @@
+<div class="site-container" [ngClass]="getClasses()" [attr.dir]="rtl ? 'rtl' : null">
+  <tgpr-top-navbar [title]="pageTitle" (sidebarState)="sidebarState()"></tgpr-top-navbar>
+
+  <tgpr-side-navbar></tgpr-side-navbar>
+
+  <!--<addition-navbar></addition-navbar>-->
+
+  <main class="main-content">
+    <div class="main-content-wrap">
+      <router-outlet></router-outlet>
+    </div>
+    <!--<app-footer></app-footer>-->
+  </main>
+
+  <div class="app-overlay"></div>
+  <tgpr-timeout></tgpr-timeout>
+</div>

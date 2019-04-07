@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Create Application Category</h1>
+<mat-dialog-content>
+
+  <mat-form-field>
+    <input matInput placeholder="Category Name" [(ngModel)]="category.Name">
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="category.HasReview">Has Review</mat-checkbox>
+
+  <mat-form-field>
+    <mat-select placeholder="Review Sort Order" [(ngModel)]="category.ReviewerSortOrder">
+      <mat-option *ngFor="let cat of categoryCount" [value]="cat">
+        {{cat}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="category">OK</button>
+</div>

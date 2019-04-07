@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Create Application Option</h1>
+<mat-dialog-content>
+
+  <mat-form-field>
+    <input matInput placeholder="Option Text" [(ngModel)]="option.Text">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Option Status" [(ngModel)]="option.ApplicationOptionStatusId">
+      <mat-option *ngFor="let type of optionStatuses" [value]="type.key">
+        {{type.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Review Sort Order" [(ngModel)]="option.ReviewerSortOrder">
+      <mat-option *ngFor="let opt of optionCount" [value]="opt">
+        {{opt}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="option">OK</button>
+</div>

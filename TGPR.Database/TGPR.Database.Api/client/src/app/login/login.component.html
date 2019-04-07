@@ -1,0 +1,31 @@
+<ni-card [title]="'TGPR Database Login'" [align]="'center'">
+  <form (ngSubmit)="_viewModel.login()">
+    <mat-form-field class="md-icon-left">
+      <mat-icon matPrefix>perm_identity</mat-icon>
+      <input name="email" matInput placeholder="Email" type="email" [formControl]="_viewModel.emailFormControl">
+      <mat-error *ngIf="_viewModel.emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="_viewModel.emailFormControl.hasError('email') && !_viewModel.emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="md-icon-left">
+      <mat-icon matPrefix>lock_outline</mat-icon>
+      <input name="password" matInput placeholder="Password" type="password" [formControl]="_viewModel.passwordFormControl">
+      <mat-error *ngIf="_viewModel.passwordFormControl.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="_viewModel.invalidCredentials" class="alert alert-danger mt-1">Invalid email and/or password.</div>
+
+    <button ni-button [view]="'accent'" [block]="true" class="mt-1">Sign In</button>
+
+    <div class="additional-info">
+      <a href="#">Forgot your password?</a>
+    </div>
+  </form>
+</ni-card>

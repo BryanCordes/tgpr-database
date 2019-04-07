@@ -1,0 +1,69 @@
+<ni-breadcrumb [menu]="breadcrumb" [style]="'custom1'" class="mb-4"></ni-breadcrumb>
+
+<div class="row">
+  <div class="col-sm-6">
+    <ni-card [title]="'Roles'" [align]="'left'">
+      <div class="text-right">
+        <button mat-raised-button (click)="create()" style="margin: 16px 8px;"><i class="material-icons">add</i> Create </button>
+      </div>
+      <table mat-table [dataSource]="_viewModel.dataSource" matSort class="tgpr-table mat-elevation-z8" width="100%">
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Role Name</th>
+          <td mat-cell *matCellDef="let role">{{role.Name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let role" class="tgpr-icon-cell text-center">
+            <swal
+              #deleteRole
+              title="Delete Role"
+              text="Are you sure you would like to delete this role?"
+              type="warning"
+              [showCancelButton]="true"
+              [focusCancel]="true"
+              (confirm)="delete(role)">
+            </swal>
+
+            <button mat-button
+                    [swal]="deleteRole"
+                    matTooltip="Delete">
+              <i class="material-icons">delete_outline</i>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rename">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let role" class="tgpr-icon-cell text-center">
+            <button mat-button
+                    (click)="rename(role)"
+                    matTooltip="Rename">
+              <i class="material-icons">format_shapes</i>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let role" class="tgpr-icon-cell text-center">
+            <button mat-button
+                    (click)="edit(role)"
+                    matTooltip="Edit">
+              <i class="material-icons">edit</i>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="_viewModel.columns"></tr>
+        <tr mat-row *matRowDef="let role; columns: _viewModel.columns"></tr>
+      </table>
+    </ni-card>
+  </div>
+  <div class="col-sm-6">
+    <tgpr-role-activity-administration
+      *ngIf="_viewModel.selectedRole"
+      [activities]="_viewModel.activities"
+      [role]="_viewModel.selectedRole">
+    </tgpr-role-activity-administration>
+  </div>
+</div>

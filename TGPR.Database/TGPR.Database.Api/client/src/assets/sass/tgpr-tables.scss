@@ -1,0 +1,37 @@
+.tgpr-table-wrapper {
+  overflow-x: auto !important;
+}
+
+.tgpr-table {
+  width: 100%;
+
+  &.tgpr-paging {
+    margin-bottom: 0;
+  }
+
+  td {
+    white-space: nowrap;
+  }
+
+  .tgpr-header-center {
+    justify-content: center !important;
+  }
+
+  .tgpr-icon-cell {
+    min-width: 25px !important;
+    width: 25px !important;;
+    padding: 0 !important;
+
+    &:last-of-type {
+      padding-right: 24px !important;
+    }
+
+    button {
+      min-width: 25px;
+      width: 25px;
+      padding: 0;
+    }
+  }
+}
+
+

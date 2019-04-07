@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Edit Application Question</h1>
+<mat-dialog-content>
+
+  <mat-form-field>
+    <mat-select placeholder="Question Type" [(ngModel)]="editModel.ApplicationQuestionTypeId">
+      <mat-option *ngFor="let type of editModel.questionTypes" [value]="type.ApplicationQuestionTypeId">
+        {{type.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Question Text" [(ngModel)]="editModel.Text">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Review Sort Order" [(ngModel)]="editModel.ReviewerSortOrder">
+      <mat-option *ngFor="let cat of questionCount" [value]="cat">
+        {{cat}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="editModel">OK</button>
+</div>
