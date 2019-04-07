@@ -13,7 +13,7 @@ export class UserRoleListComponent implements OnInit {
   @Input() user: UserModel;
   @Input() roles: RoleModel[];
 
-  constructor(private _viewModel: UserRoleListViewModel) { }
+  constructor(public _viewModel: UserRoleListViewModel) { }
 
   public toggle(model: UserRoleDisplayModel) {
     if (model.UserRole) {
