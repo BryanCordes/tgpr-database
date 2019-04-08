@@ -67,26 +67,23 @@ namespace TGPR.Database.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.TryCreateDatabase();
             }
+
+            app.TryCreateDatabase();
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
             app.UseAuthentication();
 
-            // global cors policy
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
-
-            app.UseMvc(routes =>
+            app.UseCors(options =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                options.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
             });
+
+            app.UseMvc();
 
             app.UseSpa(spa =>
             {

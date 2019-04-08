@@ -45,10 +45,13 @@ import {EditApplicationQuestionDialogComponent} from './applications/questions/e
 import {ApplicationAdministrationOptionsComponent} from './applications/options/application-administration-options.component';
 import {CreateApplicationOptionDialogComponent} from './applications/options/create/create-application-option-dialog.component';
 import {EditApplicationOptionDialogComponent} from './applications/options/edit/edit-application-option-dialog.component';
+import {SharedService} from '../layout/shared.service';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
   imports: [
     CommonModule,
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialComponentsModule,
@@ -97,6 +100,7 @@ import {EditApplicationOptionDialogComponent} from './applications/options/edit/
     EditApplicationOptionDialogComponent
   ],
   providers: [
+    SharedService,
     UserAdministrationService,
     UserRoleService,
     RoleService,
