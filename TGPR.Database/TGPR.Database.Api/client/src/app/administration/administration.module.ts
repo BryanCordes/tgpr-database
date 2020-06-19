@@ -9,18 +9,18 @@ import {RoleAdministrationComponent} from './roles/role-administration.component
 import {RoleActivityAdministrationComponent} from './roles/activities/role-activity-administration.component';
 import {CreateRoleDialogComponent} from './roles/create/create-role-dialog.component';
 import {SecurityActivityService} from '../_services/administration/roles/security-activity.service';
-import {SecurityActivitiesResolver} from '../_resolvers/roles/security-activities.resolver';
-import {EditableRolesResolver} from '../_resolvers/roles/editable-roles.resolver';
+import {SecurityActivitiesResolver} from '../_services/administration/roles/resolvers/security-activities.resolver';
+import {EditableRolesResolver} from '../_services/administration/roles/resolvers/editable-roles.resolver';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {EditRoleDialogComponent} from './roles/edit/edit-role-dialog.component';
-import {UserAdministrationUsersResolver} from '../_resolvers/users/user-administration-users.resolver';
+import {UserAdministrationUsersResolver} from '../_services/administration/users/resolvers/user-administration-users.resolver';
 import {UserAdministrationService} from '../_services/administration/users/user-administration.service';
 import {UserAdministrationComponent} from './users/user-administration.component';
 import {CreateUserComponent} from './users/create/create-user.component';
-import {RolesResolver} from '../_resolvers/roles/roles.resolver';
+import {RolesResolver} from '../_services/administration/roles/resolvers/roles.resolver';
 import {UserRoleService} from '../_services/administration/users/user-role.service';
 import {UserRoleListComponent} from './users/roles/user-role-list.component';
-import {UserAdministrationUserResolver} from '../_resolvers/users/user-administration-user.resolver';
+import {UserAdministrationUserResolver} from '../_services/administration/users/resolvers/user-administration-user.resolver';
 import {EditUserComponent} from './users/edit/edit-user.component';
 import {NgxMaskModule} from 'ngx-mask';
 import {ApplicationTemplateService} from '../_services/administration/applications/application-template.service';
@@ -47,6 +47,15 @@ import {CreateApplicationOptionDialogComponent} from './applications/options/cre
 import {EditApplicationOptionDialogComponent} from './applications/options/edit/edit-application-option-dialog.component';
 import {SharedService} from '../layout/shared.service';
 import {BrowserModule} from '@angular/platform-browser';
+import {TestApplicationTemplateComponent} from './applications/test/test-application-template.component';
+import {TestApplicationTemplateQuestionComponent} from './applications/test/questions/test-application-template-question.component';
+import {QuestionTypeTextComponent} from './applications/test/questions/types/text/question-type-text.component';
+import {QuestionTypeSingleComponent} from './applications/test/questions/types/single/question-type-single.component';
+import {TestApplicationTemplateQuestionsComponent} from './applications/test/question-groups/test-application-template-questions.component';
+import {QuestionTypeMultiComponent} from './applications/test/questions/types/multiple/question-type-multi.component';
+import {QuestionTypeDropdownComponent} from './applications/test/questions/types/dropdown/question-type-dropdown.component';
+import {QuestionTypeInfoComponent} from './applications/test/questions/types/information/question-type-info.component';
+import {ApplicationService} from '../_services/administration/applications/application.service';
 
 @NgModule({
   imports: [
@@ -85,7 +94,15 @@ import {BrowserModule} from '@angular/platform-browser';
     EditApplicationQuestionDialogComponent,
     ApplicationAdministrationOptionsComponent,
     CreateApplicationOptionDialogComponent,
-    EditApplicationOptionDialogComponent
+    EditApplicationOptionDialogComponent,
+    TestApplicationTemplateComponent,
+    TestApplicationTemplateQuestionsComponent,
+    TestApplicationTemplateQuestionComponent,
+    QuestionTypeTextComponent,
+    QuestionTypeSingleComponent,
+    QuestionTypeMultiComponent,
+    QuestionTypeDropdownComponent,
+    QuestionTypeInfoComponent
   ],
   entryComponents: [
     CreateRoleDialogComponent,
@@ -119,7 +136,8 @@ import {BrowserModule} from '@angular/platform-browser';
     ApplicationAdministrationTemplateResolver,
     ApplicationTypeResolver,
     ApplicationTemplateResolver,
-    ApplicationQuestionTypeResolver
+    ApplicationQuestionTypeResolver,
+    ApplicationService
   ]
 })
 

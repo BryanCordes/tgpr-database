@@ -41,6 +41,10 @@ export class TimeoutComponent implements OnInit {
       .subscribe(() => {
         if(Swal && Swal.isVisible()) {
           Swal.clickCancel();
+
+          // we are still here
+          // update the token
+          this._authService.refreshToken();
         }
       });
 

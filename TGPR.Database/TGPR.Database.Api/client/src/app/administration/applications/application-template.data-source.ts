@@ -63,7 +63,6 @@ export class ApplicationTemplateDataSource extends DataSource<ApplicationTemplat
     let dataSourceResponse = response as DataSourceResponse<ApplicationTemplateSummaryModel[]>;
 
     this.total = dataSourceResponse.TotalRecords;
-    console.log(this.total);
 
     return dataSourceResponse.Data;
   }

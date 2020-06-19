@@ -73,7 +73,7 @@ namespace TGPR.Database.Components.Authenitcation
 
             string userId = identity.Claims.Single(c => c.Type == TokenConstants.Strings.JwtClaimIdentifiers.Id).Value;
 
-            if (Guid.TryParse(userId, out Guid userUid))
+            if (!Guid.TryParse(userId, out Guid userUid))
             {
                 throw new SecurityTokenException("invalid_grant");
             }
@@ -98,7 +98,7 @@ namespace TGPR.Database.Components.Authenitcation
             _validationParameters.ValidateLifetime = false;
 
             ClaimsPrincipal principal = tokenHandler.ValidateToken(token, _validationParameters, out var securityToken);
-            if (!(securityToken is JwtSecurityToken jwtToken))
+            if (!(securityToken is JwtSecurityToken))
             {
                 _validationParameters.ValidateLifetime = true;
 

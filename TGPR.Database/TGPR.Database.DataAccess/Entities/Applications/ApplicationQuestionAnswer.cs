@@ -11,8 +11,7 @@ namespace TGPR.Database.DataAccess.Entities.Applications
         public int ApplicationId { get; set; }
         public int ApplicationQuestionId { get; set; }
         public int? ApplicationOptionId { get; set; }
-
-        [Required]
+        
         public string Text { get; set; }
 
         [ForeignKey("ApplicationId")]

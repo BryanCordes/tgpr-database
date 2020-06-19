@@ -1,0 +1,12 @@
+<div class="row" *ngFor="let questionGroup of _viewModel.questionGroups">
+  <div class="col-md-{{question.Width}}" *ngFor="let question of questionGroup">
+
+    <tgpr-application-administration-test-question #quesion
+                                                   [question]="question"
+                                                   [formGroup]="formGroup"
+                                                   [questionNumber]="question.Count"
+                                                   [answers]="answers">
+    </tgpr-application-administration-test-question>
+
+  </div>
+</div>

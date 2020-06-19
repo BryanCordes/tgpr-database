@@ -1,0 +1,41 @@
+<div class="tgpr-question mat-elevation-z2">
+  <div class="row">
+    <div class="col-md-12 tgpr-question-text">
+      <span *ngIf="question.ApplicationQuestionTypeId === questionType.Information" class="tgpr-info-icon"><mat-icon>info</mat-icon></span>
+      <span *ngIf="question.ApplicationQuestionTypeId !== questionType.Information">{{question.Text}}</span>
+    </div>
+  </div>
+
+  <tgpr-question-type-text #textQuestion
+                           *ngIf="question.ApplicationQuestionTypeId === questionType.Text"
+                           [question]="question"
+                           [formGroup]="formGroup"
+                           [answers]="answers">
+  </tgpr-question-type-text>
+
+  <tgpr-question-type-single #singleQuestion
+                             *ngIf="question.ApplicationQuestionTypeId === questionType.SingleSelection"
+                             [question]="question"
+                             [formGroup]="formGroup"
+                             [answers]="answers">
+  </tgpr-question-type-single>
+
+  <tgpr-question-type-multi #multiQuestion
+                            *ngIf="question.ApplicationQuestionTypeId === questionType.MultipleSelection"
+                            [question]="question"
+                            [formGroup]="formGroup"
+                            [answers]="answers">
+  </tgpr-question-type-multi>
+
+  <tgpr-question-type-dropdown #dropdownQuestion
+                               *ngIf="question.ApplicationQuestionTypeId === questionType.Dropdown"
+                               [question]="question"
+                               [formGroup]="formGroup"
+                               [answers]="answers">
+  </tgpr-question-type-dropdown>
+
+  <tgpr-question-type-info *ngIf="question.ApplicationQuestionTypeId === questionType.Information"
+                           [question]="question">
+  </tgpr-question-type-info>
+
+</div>

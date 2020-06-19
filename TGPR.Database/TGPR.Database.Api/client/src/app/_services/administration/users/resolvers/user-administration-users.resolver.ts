@@ -1,10 +1,10 @@
-import {DataSourceResponse} from '../../_models/shared/datasource-response';
+import {DataSourceResponse} from '../../../../_models/shared/datasource-response';
 import {Observable} from 'rxjs/internal/Observable';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {DataSourceFilter} from '../../_models/shared/datasource-filter';
+import {DataSourceFilter} from '../../../../_models/shared/datasource-filter';
 import {Injectable} from '@angular/core';
-import {UserAdministrationService} from '../../_services/administration/users/user-administration.service';
-import {UserSummaryModel} from '../../_models/administration/users/user-summary.model';
+import {UserAdministrationService} from '../user-administration.service';
+import {UserSummaryModel} from '../../../../_models/administration/users/user-summary.model';
 
 @Injectable()
 export class UserAdministrationUsersResolver implements Resolve<DataSourceResponse<UserSummaryModel[]>> {

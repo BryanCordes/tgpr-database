@@ -23,6 +23,9 @@ namespace TGPR.Database.DataAccess.Entities.Applications
         public int ReviewerSortOrder { get; set; }
 
         [Required]
+        public int Width { get; set; }
+
+        [Required]
         public bool Deleted { get; set; }
 
         [ForeignKey("ApplicationQuestionTypeId")]

@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs";
-import {UserAdministrationService} from '../../_services/administration/users/user-administration.service';
-import {UserModel} from '../../_models/administration/users/user.model';
+import {UserAdministrationService} from '../user-administration.service';
+import {UserModel} from '../../../../_models/administration/users/user.model';
 
 @Injectable()
 export class UserAdministrationUserResolver implements Resolve<UserModel> {

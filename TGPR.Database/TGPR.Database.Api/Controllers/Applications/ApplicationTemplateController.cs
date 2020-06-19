@@ -13,7 +13,7 @@ using TGPR.Database.Components.Applications;
 namespace TGPR.Database.Api.Controllers.Applications
 {
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     [ApiController]
     public class ApplicationTemplateController : ControllerBase
     {

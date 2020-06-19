@@ -74,7 +74,8 @@ export class ApplicationAdministrationQuestionsViewModel {
       ApplicationQuestionId: question.ApplicationQuestionId,
       ApplicationQuestionTypeId: question.ApplicationQuestionTypeId,
       Text: question.Text,
-      ReviewerSortOrder: question.ReviewerSortOrder
+      ReviewerSortOrder: question.ReviewerSortOrder,
+      Width: question.Width
     };
 
     const dialogRef = this._dialog.open(EditApplicationQuestionDialogComponent, {
@@ -101,6 +102,7 @@ export class ApplicationAdministrationQuestionsViewModel {
 
             question.Text = savedQuestion.Text;
             question.ApplicationQuestionTypeId = savedQuestion.ApplicationQuestionTypeId;
+            question.Width = savedQuestion.Width;
             question.Options = savedQuestion.Options;
           });
       });
@@ -131,7 +133,7 @@ export class ApplicationAdministrationQuestionsViewModel {
       return "";
     }
 
-    let description: string = `Type: ${type.Name} | Review Order: ${question.ReviewerSortOrder}`;
+    let description: string = `Type: ${type.Name} | Review Order: ${question.ReviewerSortOrder} | Width: ${question.Width}`;
 
     return description;
   }

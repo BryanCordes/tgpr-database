@@ -14,6 +14,8 @@ namespace TGPR.Database.Common.Models.Applications
         public int ApplicationSortOrder { get; set; }
         public int ReviewerSortOrder { get; set; }
 
+        public int Width { get; set; }
+
         public bool Deleted { get; set; }
 
         public virtual ApplicationQuestionTypeModel ApplicationQuestionType { get; set; }

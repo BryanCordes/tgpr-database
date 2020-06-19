@@ -20,6 +20,15 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Width (out of 12)" [(ngModel)]="editModel.Width">
+      <mat-option *ngFor="let q of questionWidths" [value]="q">
+        {{q}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
 </mat-dialog-content>
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()">Cancel</button>

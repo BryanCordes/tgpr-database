@@ -27,6 +27,25 @@ export class SideMenuComponent implements OnInit {
         },
         'routing': '/dashboard'
       }, {
+        'title': 'Applications',
+        'icon': {
+          'class': 'fa fa-tasks',
+          'bg': '#b3e5fc',
+          'color': 'rgba(0,0,0,.87)'
+        },
+        'activities': [
+          SecurityActivityEnum.CompanionApplicationRead
+        ],
+        'sub': [
+          {
+            'title': 'Companion',
+            'routing': '/applications/companion',
+            'activities': [
+              SecurityActivityEnum.ApplicationTemplateRead
+            ]
+          }
+        ]
+      }, {
         'title': 'Administration',
         'icon': {
           'class': 'fa fa-desktop',

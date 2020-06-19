@@ -1,6 +1,6 @@
 export class ApplicationQuestionAnswerModel {
-    ApplicationQuestionAnswerId: number;
+    ApplicationQuestionAnswerId?: number;
     ApplicationQuestionId: number;
-    ApplicationOptionId: number;
-    Text: string;
+    ApplicationOptionId?: number;
+    Text?: string;
 }

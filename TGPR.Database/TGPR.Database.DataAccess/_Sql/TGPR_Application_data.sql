@@ -71,7 +71,9 @@ BEGIN
 		  ,(3, 'UserRead')
 		  ,(4, 'UserWrite')
 		  ,(5, 'UserRoleRead')
-		  ,(6, 'UserRoleWrite')		  
+		  ,(6, 'UserRoleWrite')		 
+		  ,(7, 'CompanionApplicationRead')
+		  ,(8, 'CompanionApplicationWrite')
 END
 
 IF NOT EXISTS (SELECT 1 FROM RoleSecurityActivity WHERE RoleId='CEBD2B84-DAFA-46EF-B54E-887D7FE2FCCE')
@@ -83,6 +85,8 @@ BEGIN
 		  ,('CEBD2B84-DAFA-46EF-B54E-887D7FE2FCCE', 4)
 		  ,('CEBD2B84-DAFA-46EF-B54E-887D7FE2FCCE', 5)
 		  ,('CEBD2B84-DAFA-46EF-B54E-887D7FE2FCCE', 6)
+		  ,('CEBD2B84-DAFA-46EF-B54E-887D7FE2FCCE', 7)
+		  ,('CEBD2B84-DAFA-46EF-B54E-887D7FE2FCCE', 8)
 END
 
 IF NOT EXISTS (SELECT 1 FROM Version)

@@ -23,6 +23,7 @@ export class CreateApplicationQuestionQuestionDialogComponent implements OnInit 
   questionTypes: ApplicationQuestionTypeModel[];
 
   questionCount: number[] = [];
+  questionWidths: number[] = [];
 
   constructor(public dialogRef: MatDialogRef<CreateApplicationQuestionQuestionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: CreateApplicationQuestionModel) { }
 
@@ -53,12 +54,16 @@ export class CreateApplicationQuestionQuestionDialogComponent implements OnInit 
       ReviewerSortOrder: questions
         ? questions.length + 1
         : 1,
-      Options: [],
-      Answer: null
+      Width: 12,
+      Options: []
     };
 
-    for(let i: number = 1; i <= questions.length + 1; i++) {
+    for (let i: number = 1; i <= questions.length + 1; i++) {
       this.questionCount.push(i);
+    }
+
+    for (let i: number = 1; i <= 12; i++) {
+      this.questionWidths.push(i);
     }
   }
 }

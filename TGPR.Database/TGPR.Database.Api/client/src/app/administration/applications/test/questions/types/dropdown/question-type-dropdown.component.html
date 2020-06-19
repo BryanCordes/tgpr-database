@@ -1,0 +1,34 @@
+<div class="row tgpr-radio-buttons">
+  <div [formGroup]="formGroup" class="col-md-12 tgpr-question-answer">
+
+    <mat-form-field>
+      <mat-select [formControl]="_viewModel.formControl"
+                  (selectionChange)="setOption($event)"
+                  placeholder="Select here"
+                  required>
+        <mat-option *ngFor="let option of _viewModel.question.Options"
+                    [value]="option">
+          {{option.Text}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf=" _viewModel.formControl
+                       && _viewModel.formControl.hasError('required')
+                       && _viewModel.formControl.touched">
+        This field is <strong>required</strong>.
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+</div>
+<div *ngIf="_viewModel.activeOption
+            && _viewModel.activeOption.ChildQuestions
+            && _viewModel.activeOption.ChildQuestions.length > 0" class="row tgpr-child-questions">
+  <div class="col-md-12">
+
+    <tgpr-application-administration-test-questions [questions]="_viewModel.activeOption.ChildQuestions"
+                                                    [formGroup]="_viewModel.formGroup"
+                                                    [answers]="answers">
+    </tgpr-application-administration-test-questions>
+  </div>
+
+</div>

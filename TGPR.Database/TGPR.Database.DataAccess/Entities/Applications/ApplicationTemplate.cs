@@ -11,6 +11,7 @@ namespace TGPR.Database.DataAccess.Entities.Applications
     {
         [Key]
         public int ApplicationTemplateId { get; set; }
+
         public int ApplicationTypeId { get; set; }
 
         [Required]

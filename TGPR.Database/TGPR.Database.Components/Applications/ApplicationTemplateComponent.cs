@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using TGPR.Database.Common.Data;
+using TGPR.Database.Common.Enums.Applications;
 using TGPR.Database.Common.Models.Applications;
 using TGPR.Database.DataAccess.Entities.Applications;
 using TGPR.Database.DataAccess.Operational;
@@ -14,6 +15,8 @@ namespace TGPR.Database.Components.Applications
     public interface IApplicationTemplateComponent
     {
         Task<ApplicationTemplateModel> GetTemplateAsync(int applicationTemplateId);
+        Task<ApplicationTemplateModel> GetReviewTemplateAsync(int applicationTemplateId);
+        Task<ApplicationTemplateModel> GetActiveTemplateAsync(ApplicationTypeEnum applicationType);
         Task<DataSourceResponse<ApplicationTemplateModel>> GetTemplatesAsync(DataSourceFilter filter);
         Task<ApplicationTemplateModel> CreateTemplateAsync(ApplicationTemplateModel template, string userId);
         Task UpdateName(int applicationTemplateId, ApplicationTemplateModel template, string userId);
@@ -37,6 +40,43 @@ namespace TGPR.Database.Components.Applications
         {
             using (var repo = _repoFactory.Create<IApplicationTemplateRepository>())
             {
+                ApplicationTemplate template = await repo.GetTemplateAsync(applicationTemplateId);
+
+                repo.DiscardChanges();
+
+                var model = _mapper.Map<ApplicationTemplateModel>(template);
+
+                ArrangeQuestions(model);
+
+                return model;
+            }
+        }
+
+        public async Task<ApplicationTemplateModel> GetReviewTemplateAsync(int applicationTemplateId)
+        {
+            using (var repo = _repoFactory.Create<IApplicationTemplateRepository>())
+            {
+                ApplicationTemplate template = await repo.GetReviewTemplateAsync(applicationTemplateId);
+
+                repo.DiscardChanges();
+
+                var model = _mapper.Map<ApplicationTemplateModel>(template);
+
+                ArrangeQuestions(model);
+
+                return model;
+            }
+        }
+
+        public async Task<ApplicationTemplateModel> GetActiveTemplateAsync(ApplicationTypeEnum applicationType)
+        {
+            using (var repo = _repoFactory.Create<IApplicationTemplateRepository>())
+            {
+                int applicationTemplateId = await repo
+                    .GetValueAsync(x => 
+                            x.ApplicationTypeId == (int) applicationType && x.Active,
+                            x => x.ApplicationTemplateId);
+
                 ApplicationTemplate template = await repo.GetTemplateAsync(applicationTemplateId);
 
                 repo.DiscardChanges();

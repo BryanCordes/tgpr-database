@@ -1,0 +1,29 @@
+<div class="row tgpr-radio-buttons">
+  <div [formGroup]="formGroup" class="col-md-12 tgpr-question-answer">
+    <mat-radio-group [formControl]="_viewModel.formControl">
+      <mat-radio-button *ngFor="let option of _viewModel.question.Options"
+                        value="{{option.ApplicationOptionId}}"
+                        (change)="setOption(option)">
+        {{option.Text}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-error *ngIf=" _viewModel.formControl
+                       && _viewModel.formControl.hasError('required')
+                       && _viewModel.formControl.touched">
+      This field is <strong>required</strong>.
+    </mat-error>
+  </div>
+</div>
+<div *ngIf="_viewModel.activeOption
+            && _viewModel.activeOption.ChildQuestions
+            && _viewModel.activeOption.ChildQuestions.length > 0" class="row tgpr-child-questions">
+  <div class="col-md-12">
+
+    <tgpr-application-administration-test-questions #questions
+                                                    [questions]="_viewModel.activeOption.ChildQuestions"
+                                                    [formGroup]="_viewModel.formGroup"
+                                                    [answers]="answers">
+    </tgpr-application-administration-test-questions>
+  </div>
+
+</div>

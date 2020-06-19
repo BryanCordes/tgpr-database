@@ -13,7 +13,6 @@ import {
 import {ApplicationTemplateModel} from '../../_models/administration/applications/application-template.model';
 import {Router} from '@angular/router';
 import {RenameApplicationTemplateDialogComponent} from './rename/rename-application-template-dialog.component';
-import {RoleModel} from '../../_models/administration/users/role.model';
 
 @Injectable()
 export class ApplicationAdministrationViewModel {
@@ -114,6 +113,10 @@ export class ApplicationAdministrationViewModel {
             template.Name = modelData;
           });
       });
+  }
+
+  public test(template: ApplicationTemplateSummaryModel) {
+    this._router.navigate(["administration", "application", template.ApplicationTemplateId, "test"]);
   }
 
   public edit(template: ApplicationTemplateSummaryModel) {

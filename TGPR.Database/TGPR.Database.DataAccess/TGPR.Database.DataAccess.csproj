@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Entities\Applications\" />
-    <Folder Include="Repositories\Applications\" />
-    <Folder Include="_Sql\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="_Sql\Migrations\v1.1.1.1.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="_Sql\TGPR_Application_constraints.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

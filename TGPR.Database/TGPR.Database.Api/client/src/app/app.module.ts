@@ -12,7 +12,7 @@ import {ActivityGuard} from './_guards/activity.guard';
 import {JwtInterceptor} from './_services/authentication/jwt.interceptor';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {SharedService} from './layout/shared.service';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {ApplicationsModule} from './applications/applications.module';
 
 @NgModule({
   imports: [
@@ -21,6 +21,7 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
     LayoutModule,
     LoginModule,
     AdministrationModule,
+    ApplicationsModule,
     BrowserAnimationsModule
   ],
   declarations: [
@@ -30,8 +31,7 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
     SharedService,
     AuthGuard,
     ActivityGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    //{provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

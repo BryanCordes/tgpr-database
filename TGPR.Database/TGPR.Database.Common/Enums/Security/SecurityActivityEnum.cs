@@ -7,6 +7,8 @@
         UserRead = 3,
         UserWrite = 4,
         UserRoleRead = 5,
-        UserRoleWrite = 6
+        UserRoleWrite = 6,
+        CompanionApplicationRead = 7,
+        CompanionApplicationWrite = 8
     }
 }

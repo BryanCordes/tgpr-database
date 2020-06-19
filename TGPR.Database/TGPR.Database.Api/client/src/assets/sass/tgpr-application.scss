@@ -1,0 +1,45 @@
+.tgpr-application {
+
+  .tgpr-category-header {
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #e5e6e9;
+
+    margin-bottom: 20px;
+  }
+
+  .tgpr-question {
+
+    margin-bottom: 15px;
+    padding: 15px;
+
+    .tgpr-question-text {
+      font-weight: bold;
+    }
+
+    .tgpr-radio-buttons {
+      margin-top: 20px;
+    }
+
+    .tgpr-child-questions {
+      margin-top: 20px;
+    }
+
+    .tgpr-question-checkbox {
+      margin: 0 10px;
+    }
+
+    .tgpr-question-info {
+      margin-top: 20px;
+    }
+
+    .tgpr-info-icon {
+      mat-icon {
+        color: darkblue;
+        top: 5px;
+      }
+    }
+
+  }
+
+}

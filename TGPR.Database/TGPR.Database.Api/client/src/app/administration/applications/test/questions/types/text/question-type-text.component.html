@@ -1,0 +1,13 @@
+<div class="row">
+  <div [formGroup]="formGroup" class="col-md-12 tgpr-question-answer">
+    <mat-form-field>
+      <input matInput [formControl]="_viewModel.formControl" (input)="setText($event)" placeholder="Answer here" type="text" required>
+
+      <mat-error *ngIf="_viewModel.formControl
+                        && _viewModel.formControl.hasError('required')">
+        This field is <strong>required</strong>.
+      </mat-error>
+
+    </mat-form-field>
+  </div>
+</div>

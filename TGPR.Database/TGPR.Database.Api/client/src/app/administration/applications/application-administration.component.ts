@@ -43,6 +43,10 @@ export class ApplicationAdministrationComponent implements OnInit, AfterViewInit
     this._viewModel.rename(template);
   }
 
+  public test(template: ApplicationTemplateSummaryModel) {
+    this._viewModel.test(template);
+  }
+
   public edit(template: ApplicationTemplateSummaryModel) {
     this._viewModel.edit(template);
   }

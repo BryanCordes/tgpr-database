@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TGPR.Database.Common.Data;
@@ -33,7 +32,7 @@ namespace TGPR.Database.DataAccess.Repositories
 
             int totalCount = query.Count();
 
-            TryAddFilter(query, filter, out query);
+            TryAddStringFilter(query, filter, out query);
 
             int skipCount = filter.Page * filter.PageSize;
 
@@ -77,7 +76,9 @@ namespace TGPR.Database.DataAccess.Repositories
 
             int totalCount = await query.CountAsync();
 
-            TryAddFilter(query, filter, out query);
+            TryAddStringFilter(query, filter, out query);
+
+            TryAddIntFilter(query, filter, out query);
 
             int skipCount = filter.Page * filter.PageSize;
 
@@ -95,17 +96,9 @@ namespace TGPR.Database.DataAccess.Repositories
                 query = query
                     .OrderByProperty(filter.SortColumn);
             }
-
-            var results = new List<TEntity>();
-            try
-            {
-                results = await query
-                    .ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                string s = ex.Message;
-            }
+            
+            List<TEntity> results = await query
+                .ToListAsync();
 
             var response = new DataSourceResponse<TEntity>
             {
@@ -117,7 +110,7 @@ namespace TGPR.Database.DataAccess.Repositories
             return response;
         }
 
-        protected void TryAddFilter(IQueryable<TEntity> query, DataSourceFilter filter, out IQueryable<TEntity> filteredQuery)
+        protected void TryAddIntFilter(IQueryable<TEntity> query, DataSourceFilter filter, out IQueryable<TEntity> filteredQuery)
         {
             filteredQuery = query;
 
@@ -125,6 +118,101 @@ namespace TGPR.Database.DataAccess.Repositories
             {
                 return;
             }
+
+            int number;
+            if (!int.TryParse(filter.Filter, out number))
+            {
+                return;
+            }
+
+            // get all int fields
+            List<PropertyInfo> propInfos = typeof(TEntity).GetProperties()
+                .Where(x => x.PropertyType == typeof(int))
+                .ToList();
+
+            if (propInfos.Count == 0)
+            {
+                return;
+            }
+
+            Expression<Func<TEntity, bool>> filterExpression = x => false;
+
+            ParameterExpression parameter = Expression.Parameter(typeof(TEntity), "x");
+            ConstantExpression constant = Expression.Constant(number);
+
+            foreach (PropertyInfo info in propInfos)
+            {
+                MemberExpression property = Expression.Property(parameter, info);
+                BinaryExpression body = Expression.Equal(property, constant);
+
+                filterExpression = Expression.Lambda<Func<TEntity, bool>>(
+                    Expression.Or(filterExpression.Body, body),
+                    parameter);
+            }
+
+            filteredQuery = filteredQuery
+                .Where(filterExpression);
+        }
+
+        protected void TryAddDateFilter(IQueryable<TEntity> query, DataSourceFilter filter, out IQueryable<TEntity> filteredQuery)
+        {
+            filteredQuery = query;
+
+            if (string.IsNullOrWhiteSpace(filter.Filter))
+            {
+                return;
+            }
+
+            DateTime dateTime;
+            if (!DateTime.TryParse(filter.Filter, out dateTime))
+            {
+                return;
+            }
+
+            // get all DateTime fields
+            List<PropertyInfo> propInfos = typeof(TEntity).GetProperties()
+                .Where(x => x.PropertyType == typeof(DateTime)
+                            || x.PropertyType == typeof(DateTime?))
+                .ToList();
+
+            if (propInfos.Count == 0)
+            {
+                return;
+            }
+
+            Expression<Func<TEntity, bool>> filterExpression = x => false;
+
+            ParameterExpression parameter = Expression.Parameter(typeof(TEntity), "x");
+            ConstantExpression constant = Expression.Constant(dateTime);
+
+            foreach (PropertyInfo info in propInfos)
+            {
+                MemberExpression property = Expression.Property(parameter, info);
+                BinaryExpression body = Expression.Equal(property, constant);
+
+                filterExpression = Expression.Lambda<Func<TEntity, bool>>(
+                    Expression.Or(filterExpression.Body, body),
+                    parameter);
+            }
+
+            filteredQuery = filteredQuery
+                .Where(filterExpression);
+        }
+
+        protected void TryAddStringFilter(IQueryable<TEntity> query, DataSourceFilter filter, out IQueryable<TEntity> filteredQuery)
+        {
+            filteredQuery = query;
+
+            if (string.IsNullOrWhiteSpace(filter.Filter))
+            {
+                return;
+            }
+
+            if (!IsString(filter))
+            {
+                return;
+            }
+            
 
             List<Expression<Func<TEntity, string>>> filterProperties = FilterProperties()
                 .ToList();
@@ -168,6 +256,21 @@ namespace TGPR.Database.DataAccess.Repositories
             MethodInfo method = type.GetMethod("Contains", new[] { typeof(string) });
 
             return method;
+        }
+
+        private bool IsString(DataSourceFilter filter)
+        {
+            if (int.TryParse(filter.Filter, out _))
+            {
+                return false;
+            }
+
+            if (DateTime.TryParse(filter.Filter, out _))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

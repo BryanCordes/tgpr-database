@@ -1,0 +1,21 @@
+<div class="row tgpr-radio-buttons">
+  <div class="col-md-12 tgpr-question-answer">
+
+    <mat-checkbox *ngFor="let option of _viewModel.question.Options"
+                  (change)="toggleOption(option, $event)"
+                  class="tgpr-question-checkbox">
+      {{option.Text}}
+    </mat-checkbox>
+  </div>
+</div>
+<div *ngIf="_viewModel.showChildQuestions" class="row tgpr-child-questions">
+  <div class="col-md-12">
+
+    <tgpr-application-administration-test-questions #childQuestions
+                                                    [questions]="_viewModel.childQuestions"
+                                                    [formGroup]="_viewModel.formGroup"
+                                                    [answers]="answers">
+    </tgpr-application-administration-test-questions>
+  </div>
+
+</div>

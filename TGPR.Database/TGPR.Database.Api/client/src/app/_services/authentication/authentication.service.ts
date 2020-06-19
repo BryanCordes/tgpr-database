@@ -27,6 +27,15 @@ export class AuthenticationService {
       );
   }
 
+  refreshToken() {
+    this._httpClient.post<any>(environment.baseUrl + "/api/Authentication/refresh", {Token: this.getAuthToken(), RefreshToken: this.getRefreshToken()})
+      .subscribe(jwt => {
+        if (!jwt.Error) {
+          this.setToken(jwt);
+        }
+      });
+  }
+
   public logout(returnUrl: string = undefined) {
     localStorage.removeItem('token');
     localStorage.removeItem('auth_token');
@@ -58,6 +67,15 @@ export class AuthenticationService {
     }
 
     return token;
+  }
+
+  private getRefreshToken(): string {
+    const data = localStorage.getItem('token');
+
+    const token: any = JSON.parse(data);
+    const refreshToken = token.refresh_token;
+
+    return refreshToken;
   }
 
   private setToken(data: any) {

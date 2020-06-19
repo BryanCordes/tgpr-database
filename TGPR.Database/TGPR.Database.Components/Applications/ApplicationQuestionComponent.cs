@@ -77,6 +77,7 @@ namespace TGPR.Database.Components.Applications
                 }
 
                 entity.Text = question.Text;
+                entity.Width = question.Width;
 
                 newOptions = await TryUpdateApplicationQuestionType(entity, question);
 

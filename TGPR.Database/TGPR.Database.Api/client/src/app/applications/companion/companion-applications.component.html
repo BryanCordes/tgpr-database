@@ -1,0 +1,105 @@
+<ni-breadcrumb [menu]="breadcrumb" [style]="'custom1'" class="mb-4"></ni-breadcrumb>
+
+<ni-card [title]="'Companion Applications'" [align]="'left'">
+
+  <mat-form-field>
+    <input matInput #dataFilter placeholder="Type here to filter">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <div class="tgpr-table-wrapper">
+      <table mat-table [dataSource]="_viewModel.dataSource" matSort class="tgpr-table">
+
+        <ng-container matColumnDef="ApplicationId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Application Id</th>
+          <td mat-cell *matCellDef="let application">{{application.ApplicationId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="ApplicationStatusId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+          <td mat-cell *matCellDef="let application">{{_viewModel.getStatus(application)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="FirstName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+          <td mat-cell *matCellDef="let application">{{application.FirstName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="LastName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+          <td mat-cell *matCellDef="let application">{{application.LastName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+          <td mat-cell *matCellDef="let application">{{application.Email}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Phone">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+          <td mat-cell *matCellDef="let application">{{application.Phone | mask: '(000) 000-0000'}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Address">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+          <td mat-cell *matCellDef="let application">{{application.Address}}</td>
+        </ng-container>
+        <ng-container matColumnDef="City">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+          <td mat-cell *matCellDef="let application">{{application.City}}</td>
+        </ng-container>
+        <ng-container matColumnDef="State">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+          <td mat-cell *matCellDef="let application">{{application.State}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Zip">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Zip</th>
+          <td mat-cell *matCellDef="let application">{{application.Zip}}</td>
+        </ng-container>
+        <ng-container matColumnDef="CreatedOn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Created On</th>
+          <td mat-cell *matCellDef="let application">{{application.CreatedOn | date:"MM/dd/yyyy"}}</td>
+        </ng-container>
+        <ng-container matColumnDef="UpdatedOn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated On</th>
+          <td mat-cell *matCellDef="let application">{{application.UpdatedOn | date:"MM/dd/yyyy"}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let application" class="tgpr-icon-cell">
+            <swal
+              #deleteTemplate
+              title="Delete Application"
+              text="Are you sure you would like to delete this application?"
+              type="warning"
+              [showCancelButton]="true"
+              [focusCancel]="true"
+              (confirm)="delete(application)">
+            </swal>
+
+            <button mat-button=""
+                    [swal]="deleteTemplate"
+                    matTooltip="Delete">
+              <i class="material-icons">delete_outline</i>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let application" class="tgpr-icon-cell">
+            <button mat-button
+                    matTooltip="Edit"
+                    (click)="edit(application)">
+              <i class="material-icons">edit</i>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="_viewModel.columns"></tr>
+        <tr mat-row *matRowDef="let application; columns: _viewModel.columns"></tr>
+
+      </table>
+    </div>
+    <mat-paginator [length]="_viewModel.dataSource.total"
+                   [pageSize]="25"
+                   [pageSizeOptions]="[10,25,100]">
+    </mat-paginator>
+  </div>
+
+</ni-card>

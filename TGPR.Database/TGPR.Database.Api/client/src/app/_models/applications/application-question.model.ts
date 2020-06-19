@@ -9,7 +9,10 @@ export class ApplicationQuestionModel {
     Text: string;
     ApplicationSortOrder: number;
     ReviewerSortOrder: number;
+    Width: number;
+
+    Count?: number;
 
     Options: ApplicationOptionModel[];
-    Answer: ApplicationQuestionAnswerModel;
+    Answers?: ApplicationQuestionAnswerModel[];
 }

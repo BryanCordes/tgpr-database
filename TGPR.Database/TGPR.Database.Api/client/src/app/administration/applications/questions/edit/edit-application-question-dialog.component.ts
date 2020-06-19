@@ -10,6 +10,7 @@ export interface EditApplicationQuestionModel {
   ApplicationQuestionTypeId: number;
   Text: string;
   ReviewerSortOrder: number;
+  Width: number;
 }
 
 @Component({
@@ -20,6 +21,7 @@ export class EditApplicationQuestionDialogComponent implements OnInit {
 
   public editModel: EditApplicationQuestionModel;
   public questionCount: number[];
+  questionWidths: number[] = [];
 
 
   constructor(public dialogRef: MatDialogRef<EditApplicationQuestionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: EditApplicationQuestionModel) { }
@@ -35,6 +37,10 @@ export class EditApplicationQuestionDialogComponent implements OnInit {
 
     for(let i: number = 1; i <= this.editModel.questionCount; i++) {
       this.questionCount.push(i);
+    }
+
+    for (let i: number = 1; i <= 12; i++) {
+      this.questionWidths.push(i);
     }
   }
 }
